@@ -1,0 +1,126 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icons/maps-icons.html">
+
+<!--
+`neutra-slide`
+
+
+@demo demo/index.html 
+-->
+
+<dom-module id="neutra-slide">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .neutra_capa{
+
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    box-sizing: content-box;
+
+      }
+      .neutra_img{
+
+    width: 100%;
+      }
+      .active{
+    z-index: 99;
+    position: relative;
+    overflow: hidden;
+
+      }
+      .neutra_img_1{
+
+
+      }
+      .neutra_img_2{
+
+    position: absolute;
+    top: 0;
+    z-index: 0;
+
+      }
+      .iron_flex{
+      display: flex;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    color:#777777;
+
+    width: 100%;
+    top: 50%;
+    /* height: 100%; */
+    transform: translateY(-50%);
+    transition:1s;
+      }
+      .iron_flex:hover{
+        color:#fff;
+      }
+      .iron_flex>.iron-icon-1{
+
+    width: 51px;
+    height: 52px;
+    cursor:pointer;
+      }
+    </style>
+    <div class="neutra_capa">
+        <img src="[[imagen_1]]" class="neutra_img neutra_img_1 active" alt="">
+        <img src="[[imagen_2]]" class="neutra_img neutra_img_2" alt="">
+        <div class="iron_flex">
+          <iron-icon icon="icons:chevron-left" on-tap="evento"></iron-icon>
+          <iron-icon icon="icons:chevron-right" on-tap="evento"></iron-icon>
+
+        </div>
+       
+
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'neutra-slide',
+
+      properties: {
+        imagen_1: {
+          type: String,
+          value: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Chorroelindio.png/300px-Chorroelindio.png',
+        },
+        imagen_2: {
+          type: String,
+          value: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bosque_Cajonos.JPG/300px-Bosque_Cajonos.JPG',
+        },
+      },
+
+      evento:function(e){
+        $img_1 = document.getElementsByClassName('neutra_img_1');
+        $img_2 = document.getElementsByClassName('neutra_img_2');
+        var bandera = 1;
+        $img_1[0].classList.forEach(function(e){ 
+            if( e == 'active'){
+              $img_1[0].classList.remove('active');
+              $img_2[0].classList.add('active');
+              bandera = 0;
+            }
+          });
+          if (bandera== 0){ return; } 
+
+              $img_2[0].classList.forEach(function(e){ 
+                if( e == 'active'){
+                  $img_2[0].classList.remove('active');
+                  $img_1[0].classList.add('active');
+                  return;
+                }
+              });
+
+
+      }
+
+    });
+  </script>
+</dom-module>
